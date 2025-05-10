@@ -7932,6 +7932,7 @@ function fillScreen () {
       div.style.height = `${step}px`;
       div.style.backgroundColor = pColor;
       div.addEventListener('mouseenter', () => {
+        console.log('Mouse entered');
         const originalBg = div.style.backgroundColor;
         const originalColor = div.style.color || '#ffffff'; // fallback if not set
         const hoverTimer = setTimeout(() => {
@@ -7940,6 +7941,7 @@ function fillScreen () {
         }, 1000); // 1 second delay
       
         div.addEventListener('mouseleave', () => {
+          console.log('Mouse left before timeout');
           clearTimeout(hoverTimer); // cancel if they leave early (optional)
           div.style.backgroundColor = originalBg;
           div.style.color = originalColor;
