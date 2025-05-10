@@ -7931,13 +7931,11 @@ function fillScreen () {
       div.style.width = `${step}px`;
       div.style.height = `${step}px`;
       div.style.backgroundColor = pColor;
-
-
 div.addEventListener('mouseleave', () => {
   setTimeout(() => {
   div.style.backgroundColor = invertHexColor(div.style.backgroundColor);
   div.style.color = invertHexColor(div.style.color);
-  }, 500);
+  }, 2000);
 });
 
       container.appendChild(div);
