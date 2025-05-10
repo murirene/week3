@@ -37,22 +37,54 @@ function fillScreen () {
   container.style.flexWrap = 'wrap';
   container.style.width = `${width * step}px`;
 
-  for(let j = 0; j < height; j++) {
-    for(let i = 0; i < width; i++) {
-      let index = (j * width + i) % data.length;
+  for(let i = 0; i < data.length * 10; i++) {
+      let index = i % data.length;
       let pColor = stringToHexColor(data[index].incident_category);
       const div = document.createElement('div');
       div.style.width = `${step}px`;
       div.style.height = `${step}px`;
       div.style.backgroundColor = pColor;
       container.appendChild(div);
-    }
   }
 
   document.body.appendChild(container);
 }
+/*
+const div = document.createElement('div');
+const color = stringToHexColor(data[index].incident_category);
+div.style.backgroundColor = color;
+*/
+var originalColor = '#3399ff';
+var invertedColor = '#3399ff';
 
 
+// Event handlers
+div.addEventListener('mouseenter', () => {
+  invertedColor = invertHexColor(originalColor);
+  div.style.backgroundColor = invertedColor;
+  div.style.color = invertedColor;
+});
+
+div.addEventListener('mouseleave', () => {
+  div.style.backgroundColor = originalColor;
+  div.style.color = originalColor;
+});
+
+
+function invertHexColor(hex) {
+  hex = hex.replace('#', '');
+
+  // Expand shorthand (#abc → #aabbcc)
+  if (hex.length === 3) {
+    hex = hex.split('').map(c => c + c).join('');
+  }
+
+  const r = 255 - parseInt(hex.substring(0, 2), 16);
+  const g = 255 - parseInt(hex.substring(2, 4), 16);
+  const b = 255 - parseInt(hex.substring(4, 6), 16);
+
+  return `#${[r, g, b].map(v => v.toString(16).padStart(2, '0')).join('')}`;
+}
 
 const data = [
     {
