@@ -7931,12 +7931,20 @@ function fillScreen () {
       div.style.width = `${step}px`;
       div.style.height = `${step}px`;
       div.style.backgroundColor = pColor;
-div.addEventListener('mouseleave', () => {
-  setTimeout(() => {
-  div.style.backgroundColor = invertHexColor(div.style.backgroundColor);
-  div.style.color = invertHexColor(div.style.color);
-  }, 2000);
-});
+      div.addEventListener('mouseenter', () => {
+        const originalBg = div.style.backgroundColor;
+        const originalColor = div.style.color || '#ffffff'; // fallback if not set
+        const hoverTimer = setTimeout(() => {
+          div.style.backgroundColor = invertHexColor(originalBg);
+          div.style.color = invertHexColor(originalColor);
+        }, 1000); // 1 second delay
+      
+        div.addEventListener('mouseleave', () => {
+          clearTimeout(hoverTimer); // cancel if they leave early (optional)
+          div.style.backgroundColor = originalBg;
+          div.style.color = originalColor;
+        }, { once: true }); // only need to attach it once per hover
+      });
 
       container.appendChild(div);
   }
