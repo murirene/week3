@@ -7924,7 +7924,7 @@ function fillScreen () {
   container.style.flexWrap = 'wrap';
   container.style.width = `${width * step}px`;
 
-  for(let i = 0; i < data.length * 10; i++) {
+  for(let i = 0; i < data.length * 1000; i++) {
       let index = i % data.length;
       let pColor = stringToHexColor(data[index].incident_category);
       const div = document.createElement('div');
@@ -7935,9 +7935,9 @@ function fillScreen () {
 
 div.addEventListener('mouseleave', () => {
   setTimeout(() => {
-  div.style.backgroundColor = invertHexColor(dpColor);
-  div.style.color = invertHexColor(pColor);
-  }, 1000);
+  div.style.backgroundColor = invertHexColor(div.style.backgroundColor);
+  div.style.color = invertHexColor(div.style.color);
+  }, 500);
 });
 
       container.appendChild(div);
