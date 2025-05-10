@@ -2254,8 +2254,7 @@ const data = [
       "incident_description": "Search Warrant Service",
       "resolution": "Cite or Arrest Adult",
       "police_district": "Out of SF"
-    }];
-    /*,
+    },
     {
       "incident_datetime": "2021-07-17T12:30:00.000",
       "incident_date": "2021-07-17T00:00:00.000",
