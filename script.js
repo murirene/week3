@@ -7931,6 +7931,15 @@ function fillScreen () {
       div.style.width = `${step}px`;
       div.style.height = `${step}px`;
       div.style.backgroundColor = pColor;
+
+
+div.addEventListener('mouseleave', () => {
+  setTimeout(() => {
+  div.style.backgroundColor = invertHexColor(dpColor);
+  div.style.color = invertHexColor(pColor);
+  }, 1000);
+});
+
       container.appendChild(div);
   }
 
@@ -7945,17 +7954,6 @@ var originalColor = '#3399ff';
 var invertedColor = '#3399ff';
 
 
-// Event handlers
-div.addEventListener('mouseenter', () => {
-  invertedColor = invertHexColor(originalColor);
-  div.style.backgroundColor = invertedColor;
-  div.style.color = invertedColor;
-});
-
-div.addEventListener('mouseleave', () => {
-  div.style.backgroundColor = originalColor;
-  div.style.color = originalColor;
-});
 
 
 function invertHexColor(hex) {
