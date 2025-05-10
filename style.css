@@ -2,4 +2,6 @@ body {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start; 
+    word-break: break-word;
+    white-space: normal;
 }
