@@ -32,12 +32,11 @@ const fillScreen = () => {
 
   for(let i = 0; i < width; i++) {
     for(let j = 0; j < height; j++) {
-      let index = (y * width + x) % data.length;
+      let index = (j * width + i) % data.length;
       pColor = stringToHexColor(data[index].incident_category);
       const div = document.createElement('div');
       div.style.width = '1px';
       div.style.height = '1px';
-      div.style.position = 'absolute'; 
       div.style.left = `${i}px`;
       div.style.top = `${j}px`; 
       div.style.backgroundColor = `#{pColor}`;
