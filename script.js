@@ -26,21 +26,30 @@ window.addEventListener('resize', () => {
 });
 
 function fillScreen () {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
+  const step = 10; // size of each block in pixels
+  const width = Math.floor(window.innerWidth / step);
+  const height = Math.floor(window.innerHeight / step);
+
   document.body.innerHTML = ''; 
 
-  for(let i = 0; i < width; i++) {
-    for(let j = 0; j < height; j++) {
+  const container = document.createElement('div');
+  container.style.display = 'flex';
+  container.style.flexWrap = 'wrap';
+  container.style.width = `${width * step}px`;
+
+  for(let j = 0; j < height; j++) {
+    for(let i = 0; i < width; i++) {
       let index = (j * width + i) % data.length;
-      pColor = stringToHexColor(data[index].incident_category);
-      const div = document.createElement('span');
+      let pColor = stringToHexColor(data[index].incident_category);
+      const div = document.createElement('div');
+      div.style.width = `${step}px`;
+      div.style.height = `${step}px`;
       div.style.backgroundColor = pColor;
-      div.style.color = pColor;
-      div.innerHTML = `${data[index].incident_category}`; 
-      document.body.appendChild(div);
+      container.appendChild(div);
     }
-  }  
+  }
+
+  document.body.appendChild(container);
 }
 
 
