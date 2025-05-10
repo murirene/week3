@@ -35,8 +35,6 @@ const fillScreen = () => {
       let index = (j * width + i) % data.length;
       pColor = stringToHexColor(data[index].incident_category);
       const div = document.createElement('span');
-      div.style.width = '1px';
-      div.style.height = '1px';
       div.style.backgroundColor = pColor;
       div.style.color = pColor;
       div.innerHTML = `${data[index].incident_category}`; 
