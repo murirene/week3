@@ -7884,7 +7884,15 @@ const data = [
     }
   ];
 
-
+  function randomHexColor() {
+    return '#' + Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, '0');
+  }
+  const hoverTimer = setTimeout(() => {
+    const randomBg = randomHexColor();
+    const randomFg = randomHexColor();
+    div.style.backgroundColor = randomBg;
+    div.style.color = randomFg;
+  }, 1000); // wait 1 second after hover
 
 function stringToHexColor(str) {
   let hash = 0;
@@ -7931,22 +7939,24 @@ function fillScreen () {
       div.style.width = `${step}px`;
       div.style.height = `${step}px`;
       div.style.backgroundColor = pColor;
-      div.addEventListener('mouseenter', () => {
-        console.log('Mouse entered');
-        const originalBg = div.style.backgroundColor;
-        const originalColor = div.style.color || '#ffffff'; // fallback if not set
-        const hoverTimer = setTimeout(() => {
-          div.style.backgroundColor = invertHexColor(originalBg);
-          div.style.color = invertHexColor(originalColor);
-        }, 1000); // 1 second delay
-      
-        div.addEventListener('mouseleave', () => {
-          console.log('Mouse left before timeout');
-          clearTimeout(hoverTimer); // cancel if they leave early (optional)
-          div.style.backgroundColor = originalBg;
-          div.style.color = originalColor;
-        }, { once: true }); // only need to attach it once per hover
-      });
+
+div.addEventListener('mouseenter', () => {
+  const originalBg = div.style.backgroundColor;
+  const originalColor = div.style.color || '#ffffff';
+
+  const hoverTimer = setTimeout(() => {
+    const randomBg = randomHexColor();
+    const randomFg = randomHexColor();
+    div.style.backgroundColor = randomBg;
+    div.style.color = randomFg;
+  }, 1000); // wait 1 second after hover
+
+  div.addEventListener('mouseleave', () => {
+    clearTimeout(hoverTimer); // optional: cancel if they move out
+    div.style.backgroundColor = originalBg;
+    div.style.color = originalColor;
+  }, { once: true });
+});
 
       container.appendChild(div);
   }
