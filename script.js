@@ -42,7 +42,7 @@ const fillScreen = () => {
       div.style.backgroundColor = `#{pColor}`;
       div.style.color = `#{pColor}`;  
       div.innerHTML = `${data[index].incident_category}`; 
-      document.body.prependChild(div);   
+      document.body.appendChild(newDiv);
     }
   }  
 }
